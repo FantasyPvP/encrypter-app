@@ -1,47 +1,42 @@
-def cipher(msg):
-    ciphered = []
+def cipher(msg, key, enc):
+    output = []
     msg = msg.rstrip()
-    key = random.randint(1, len(chars)-1)
-    for char in msg:
-        idx = chars.index(char)
-        #print(idx, char, "enc1")
-        idx += key
 
-        if idx >= len(chars):
-            idx -= len(chars)
-        #print(idx, chars[idx], "enc2")
-        ciphered.append(chars[idx])
-    
-    #print("CIPHERED:", "".join(ciphered))
-    result = "".join(ciphered)
+    if key == "none":
+        key = random.randint(1, len(chars)-1)
+
+    if enc:
+        for char in msg:
+            idx = chars.index(char)
+            idx = cipherincrementer(idx, key, chars)
+            ciphered.append(chars[idx])
+    else:
+        for char in msg:
+            idx = chars.index(char)
+            idx = cipherdecrementer(idx, key, chars)
+            output.append(chars[idx])
+
+    result = "".join(output)
 
     return (result.rstrip(), key)
     
-def decipher(msg, key):
-    deciphered = []
-    for char in msg:
-        idx = chars.index(char)
-        #print(idx, char, "dec1")
-        idx -= key
-
-        if idx < 0:
-            idx += len(chars)
-
-        #print(idx, chars[idx], "dec2")
-        deciphered.append(chars[idx])
-
-    result = "".join(deciphered)
-    return result
 
 def cipherincrementer(idx, key, chars):
     idx += key
 
     if idx >= len(chars):
         idx -= len(chars)
-
+    return idx
 
 def cipherdecrementer(idx, key, chars):
     idx -= key
-
     if idx < 0:
         idx += len(chars)
+    return idx
+
+
+while True:
+    if input("encrypt or decrypt > ") == "encrypt":
+        print(cipher(input("enter message to encrypt > "), "none", True))
+    else:
+        print(cipher(input("enter message to decrypt > "), input("enter decryption key > "), True))
