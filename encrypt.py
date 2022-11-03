@@ -1,3 +1,17 @@
+import random
+
+global chars
+chars  = [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
+    "q","r","s","t","u","v","w","x","y","z",
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
+    "T","U","V","W","X","Y","Z",
+    "1","2","3","4","5","6","7","8","9","0",
+    " ", "\"", "\\","!","'","$","%","^","&","*","(",")",
+    "[","]","<",">","{","}",":",
+    "|","/","@",";","~","#","-","_","=","+","`", ",", ".", "?", "£"
+]
+
 def cipher(msg, key, enc):
     output = []
     msg = msg.rstrip()
@@ -9,7 +23,7 @@ def cipher(msg, key, enc):
         for char in msg:
             idx = chars.index(char)
             idx = cipherincrementer(idx, key, chars)
-            ciphered.append(chars[idx])
+            output.append(chars[idx])
     else:
         for char in msg:
             idx = chars.index(char)
@@ -39,4 +53,4 @@ while True:
     if input("encrypt or decrypt > ") == "encrypt":
         print(cipher(input("enter message to encrypt > "), "none", True))
     else:
-        print(cipher(input("enter message to decrypt > "), input("enter decryption key > "), True))
+        print(cipher(input("enter message to decrypt > "), int(input("enter decryption key > ")), False))
