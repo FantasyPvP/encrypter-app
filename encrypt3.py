@@ -32,4 +32,5 @@ def dec2(txt):
 
     return new
 
-main()
+if __name__ == "__main__":
+    main()

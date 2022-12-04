@@ -1,26 +1,139 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
+import sv_ttk
 
-window = Tk()
-window.geometry("480x420")
-
-centre = Frame(window, highlightbackground="black", highlightthickness=4, width=440, height=120)
-centre.grid(row=2, padx=20, pady=10)
-
-top = Frame(window, highlightbackground="black", highlightthickness=4, width=440, height=120)
-top.grid(row=1, padx=20, pady=10)
-
-bottom = Frame(window, highlightbackground="black", highlightthickness=4, width=440, height=120)
-bottom.grid(row=3, padx=20,pady=10)
-
-entry = Entry(top, width=50)
-entry.insert(0, "Enter text to encrypt")
-entry.pack(padx=20, pady=10)
-
-encryption_type=1
-radio = Radiobutton(centre, text="cipher1 | swaps rows and columns + applies a shift", variable=encryption_type, value=1)
-radio.pack()
+import encrypt
+import encrypt2
+import encrypt3
 
 
+
+
+
+
+
+class Encrypter(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("encrypter app")
+        self.geometry("420x720")
+    
+
+
+
+
+
+        layer1 = tk.Label(self, width=380, height=120)
+        layer1.place(x=20, y=10)
+
+        self.description_text = "Welcome to my encryption app!\nto use all of the features, simply select the type of encryption you want to use, select whether to encrypt or decrypt and press confirm!"
+
+        top_text = ttk.Label(layer1, text = self.description_text, wraplength="360", padding="20")
+        top_text.pack()
+
+
+
+
+
+        self.type_ = tk.StringVar()
+        self.encrypt = tk.StringVar()
+        self.text = tk.StringVar()
+        self.key = tk.StringVar()
+        self.output = ""
+        
+        # left set of radio buttons for the encrypter
+
+        layer2L = ttk.LabelFrame(self, text="encryption type", width=300, height=300)
+        layer2L["labelanchor"] = "n"
+        layer2L.place(x=40, y=160)
+
+        label = tk.Label(layer2L, width=15, height=1)
+        label.grid(column=0, row=0, ipadx=5, ipady=5)
+        radio = ttk.Radiobutton(layer2L, text="cipher1", variable=self.type_, value=1)
+        radio.grid(column=0, row=1, ipadx=5, ipady=5)
+        radio = ttk.Radiobutton(layer2L, text="cipher2", variable=self.type_, value=2)
+        radio.grid(column=0, row=2, ipadx=5, ipady=5)
+        radio = ttk.Radiobutton(layer2L, text="cipher3", variable=self.type_, value=3)
+        radio.grid(column=0, row=3, ipadx=5, ipady=5)
+        label = tk.Label(layer2L, width=20, height=1)
+        label.grid(column=0, row=4, ipadx=5, ipady=5)
+
+
+
+        layer3 = ttk.LabelFrame(self, text="text input and output", width=380, height=100)
+        layer3["labelanchor"] = "n"
+        layer3.place(x=20, y=420)
+
+
+
+
+        label = tk.Label(layer3, width=45, height=1)
+        label.grid(column=0, row=0, ipadx=5, ipady=10)
+
+        self.text = ttk.Entry(layer3, width=40, text="enter message to be encrypted") #2E2C2F
+        self.text.grid(column=0, row=1, ipadx=5, ipady=5)
+
+
+        label = tk.Label(layer3, width=45, height=1)
+        label.grid(column=0, row=2, ipadx=5, ipady=5)
+
+        self.key = ttk.Entry(layer3, width=40, text="enter decryption or encryption key") #2E2C2F
+        self.key.grid(column=0, row=3, ipadx=5, ipady=5)
+
+        label = tk.Label(layer3, width=45, height=1)
+        label.grid(column=0, row=4, ipadx=5, ipady=5)
+        
+        self.output = tk.Label(layer3, width=40, bg="#292929", wraplength="300", text="")
+        self.output.grid(column=0, row=5, ipadx=5, ipady=5)
+
+        label = tk.Label(layer3, width=50, height=1)
+        label.grid(column=0, row=6, ipadx=5, ipady=5)
+
+
+
+
+        # rightn set of options that allow you to select encrypt / decrypt and confirm
+
+        layer2R = ttk.LabelFrame(self, text="encrypt or decrypt", width=300, height=300)
+        layer2R["labelanchor"] = "n"
+        layer2R.place(x=220, y=160)
+
+        label = tk.Label(layer2R, width=15, height=1)
+        label.grid(column=0, row=0, ipadx=5, ipady=5)
+        radio = ttk.Radiobutton(layer2R, text="encrypt", variable=self.encrypt, value=1)
+        radio.grid(column=0, row=1, ipadx=5, ipady=5)
+        radio = ttk.Radiobutton(layer2R, text="decrypt", variable=self.encrypt, value=0)
+        radio.grid(column=0, row=2, ipadx=5, ipady=5)
+        label = tk.Label(layer2R, width=15, height=1)
+        label.grid(column=0, row=3, ipadx=5, ipady=5)
+        button = ttk.Button(layer2R, text="confirm", command=self.process)
+        button.grid(column=0, row=4, ipadx=5, ipady=0)
+        label = tk.Label(layer2R, width=20, height=1)
+        label.grid(column=0, row=5, ipadx=5, ipady=5)
+
+
+
+    def process(self):
+        text = self.text.get()
+        key = int(self.key.get())
+        type_ = self.type_.get()
+        encrypt_ = self.encrypt.get()
+
+        (output, key) = encrypt.cipher(text, key, encrypt_)
+
+        print(output, key)
+
+        self.output.config(text=output)
+
+
+
+        #match self.type_:
+        #    case 1:
+        #        encrypt.
+
+
+        #self.output.config(text = encryption_result)
     
 
 
@@ -36,4 +149,18 @@ radio.pack()
 
 
 
-window.mainloop()
+
+
+
+
+
+
+
+
+
+            
+
+if __name__ == "__main__":
+    window = Encrypter()
+    sv_ttk.set_theme("dark")
+    window.mainloop()

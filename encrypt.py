@@ -13,18 +13,23 @@ chars  = [
 ]
 
 def cipher(msg, key, enc):
+
+    print(msg, key, enc)
+
     output = []
     msg = msg.rstrip()
 
     if key == "none":
         key = random.randint(1, len(chars)-1)
 
-    if enc:
+    if enc == "1":
+        print("a")
         for char in msg:
             idx = chars.index(char)
             idx = cipherincrementer(idx, key, chars)
             output.append(chars[idx])
     else:
+        print("b")
         for char in msg:
             idx = chars.index(char)
             idx = cipherdecrementer(idx, key, chars)
@@ -49,8 +54,9 @@ def cipherdecrementer(idx, key, chars):
     return idx
 
 
-while True:
-    if input("encrypt or decrypt > ") == "encrypt":
-        print(cipher(input("enter message to encrypt > "), "none", True))
-    else:
-        print(cipher(input("enter message to decrypt > "), int(input("enter decryption key > ")), False))
+if __name__ == "__main__":
+    while True:
+        if input("encrypt or decrypt > ") == "encrypt":
+            print(cipher(input("enter message to encrypt > "), "none", True))
+        else:
+            print(cipher(input("enter message to decrypt > "), int(input("enter decryption key > ")), False))
