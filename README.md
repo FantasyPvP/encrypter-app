@@ -17,16 +17,25 @@ sv_ttk
 tkinter will already be installed as it is a part of python's standard set of packages.
 matplotlib will also likely be installed however if it is not, simply run the command
 
-pip install matplotlib
+> pip install matplotlib
 
 to install the package.
 sv_ttk will not be installed by default so you can just install it using 
 
-pip install sv_ttk 
+> pip install sv_ttk 
 
 finally, you can run the project simply by running 
 
 > python ./main.py
+
+
+```{python}
+
+print("hello world")
+
+
+```
+
 
 # planning
 
