@@ -28,15 +28,6 @@ finally, you can run the project simply by running
 
 > python ./main.py
 
-
-```{python}
-
-print("hello world")
-
-
-```
-
-
 # planning
 
 before i started working on the gui for this project, i sketched out a draft using a photo editor
