@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sv_ttk
+import matplotlib.pyplot as graph
 
 import encrypt
 import encrypt2
@@ -120,13 +121,28 @@ class Encrypter(tk.Tk):
         type_ = self.type_.get()
         encrypt_ = self.encrypt.get()
 
+        self.charfreq = {
+            "a" : 0, "b" : 0, "c" : 0, "d" : 0, "e" : 0, "f" : 0, "g" : 0, "h" : 0, "i" : 0, "j" : 0, 
+            "k" : 0, "l" : 0, "m" : 0, "n" : 0, "o" : 0, "p" : 0, "q" : 0, "r" : 0, "s" : 0, "t" : 0,
+            "u" : 0, "v" : 0, "w" : 0, "x" : 0, "y" : 0, "z" : 0, "0" : 0, "1" : 0, "2" : 0, "3" : 0, 
+            "4" : 0, "5" : 0, "6" : 0, "7" : 0, "8" : 0, "9" : 0
+        }
+
+
+        for char in text:
+            if char in self.charfreq:
+                self.charfreq[char] += 1
+
+        self.draw_graph()
+
+
         (output, key) = encrypt.cipher(text, key, encrypt_)
 
         print(output, key)
 
         self.output.config(text=output)
 
-
+        
 
         #match self.type_:
         #    case 1:
@@ -135,6 +151,23 @@ class Encrypter(tk.Tk):
 
         #self.output.config(text = encryption_result)
     
+    def draw_graph(self):
+
+        print(self.charfreq.keys(), self.charfreq.values())
+
+        x = [y for y in self.charfreq.keys()]
+        for key in x:
+            if self.charfreq[key] == 0:
+                del self.charfreq[key]
+
+
+        print(self.charfreq.keys(), self.charfreq.values())
+
+        graph.bar(self.charfreq.keys(), self.charfreq.values(), label="character frequency chart")
+        graph.show()
+
+        print("ok")
+
 
 
 
