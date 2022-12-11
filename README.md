@@ -69,6 +69,17 @@ while working on the code for the second encryption algorithm, i ran into an iss
 the solution to this problem was to use the .rstrip() method to remove any whitespace characters at the end of the string so that the 
 scrambling function would find the correct length of the string and therefore unscramble it correctly.
 
+```{python}
+
+encrypt.scramble(text)  # this is the cause of the problem,
+
+encrypt.scramble(text.rstrip()).rstrip() # this method removes trailing
+                                         # whitespace so the length is correct
+
+```
+
+
+
 # bug #4
 
 when implementing the encryption algorithms, i ran into a bug where the program would always just use one
