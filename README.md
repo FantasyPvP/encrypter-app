@@ -85,7 +85,9 @@ if encrypt == 1:
 elif encrypt == 2:
     encrypt2()
 else:
-    encrypt3()      # the if statement is unable to find any matches between the integer and the string
+    encrypt3()      # the if statement is unable to find any matches 
+                    # between the integer and the string
                     # so it always defaults to this final branch
-                    # the solution was to convert the value to an integer after it is fetched from the gui
+                    # the solution was to convert the value to an integer 
+                    # after it is fetched from the gui
 ```
