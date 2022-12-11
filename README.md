@@ -62,3 +62,30 @@ better than regular tkinter but did not really fit the image
 
 while working with the matplotlib module to display graphs, i had to remove characters from the graph that had a zero value. to do this i tried to use a for char in dict statement to remove unused values. this resulted in an error as the dictionary had changed size during the iteration. 
 the solution to this issue was to use a generator to create a new list of keys from the dictionary and iterate through that instead as the list of keys would not change size as i modified the dictionary itself. 
+
+# bug #3
+
+while working on the code for the second encryption algorithm, i ran into an issue where the message did not decrypt correctly. this issue was caused by trailing whitespace.
+the solution to this problem was to use the .rstrip() method to remove any whitespace characters at the end of the string so that the 
+scrambling function would find the correct length of the string and therefore unscramble it correctly.
+
+# bug #4
+
+when implementing the encryption algorithms, i ran into a bug where the program would always just use one
+encryption algorithm regardless of which one was selected. the cause of this error was a catch all else statement
+
+```{python}
+
+encrypt = input()   # creates encryption variable
+                    # lets say the input here is 1
+                    # encrypt is now a string variable
+
+if encrypt == 1:
+    encrypt1()
+elif encrypt == 2:
+    encrypt2()
+else:
+    encrypt3()      # the if statement is unable to find any matches between the integer and the string
+                    # so it always defaults to this final branch
+                    # the solution was to convert the value to an integer after it is fetched from the gui
+```
