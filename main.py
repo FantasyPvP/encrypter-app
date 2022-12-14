@@ -51,21 +51,22 @@ class Encrypter(tk.Tk):
 
     def process(self):
         text = self.text.get()
-        key = int(self.key.get())
+        key = self.key.get()
         type_ = self.type_.get()
-        encrypt_ = self.encrypt.get()
+        encrypt_ = int(self.encrypt.get())
 
         print(type_)
 
         if int(type_) == 1:
-            output = encrypt.cipher(text, key, encrypt_)
+            output = encrypt.cipher(text, int(key), encrypt_)
 
         elif int(type_) == 2:
             output = encrypt2.scramble(text.rstrip()).rstrip()
 
         elif int(type_) == 3:
+            print("ok")
             if encrypt_ == 1:
-                output = encrypt3.encrypt(text)
+                (output, key) = encrypt3.encrypt(text)
             else:
                 output = encrypt3.decrypt(text)
 
@@ -142,7 +143,7 @@ class Encrypter(tk.Tk):
         self.layer2l.radio1.grid(column=0, row=1, ipadx=5, ipady=5)
         self.layer2l.radio2 = ttk.Radiobutton(self.layer2l, text="transposition", variable=self.type_, value=2)
         self.layer2l.radio2.grid(column=0, row=2, ipadx=5, ipady=5)
-        self.layer2l.radio3 = ttk.Radiobutton(self.layer2l, text="base64", variable=self.type_, value=3)
+        self.layer2l.radio3 = ttk.Radiobutton(self.layer2l, text="vernam", variable=self.type_, value=3)
         self.layer2l.radio3.grid(column=0, row=3, ipadx=5, ipady=5)
         self.layer2l.label2 = tk.Label(self.layer2l, width=20, height=1)
         self.layer2l.label2.grid(column=0, row=4, ipadx=5, ipady=5)

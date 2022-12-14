@@ -22,7 +22,7 @@ def cipher(msg, key, enc):
     if key == "none":
         key = random.randint(1, len(chars)-1)
 
-    if enc == "1":
+    if enc == 1:
         print("a")
         for char in msg:
             idx = chars.index(char)
