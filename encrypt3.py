@@ -1,24 +1,26 @@
-import base64
+from encrypt1 import chars
+import random
 
 
+def process(text):
 
-def encrypt(msg):
-    return base64.b64encode(msg)
+    # atbash cipher
+    rev = list(reversed(chars))
 
-def decrypt(msg):
-    return base64.b64decode(msg)
+    result = ""
 
-
-
-
-
-
+    for char in text:
+        if not char in chars and not char == " ":
+            return ("err", None, None, "invalid character")
 
 
+    for char in text:
+        if char != " ":
+            idx = chars.index(char)
+            newchar = rev[idx]
+            result += newchar
 
+        else:
+            result += " "
 
-
-
-
-if __name__ == "__main__":
-    encrypt("L")
+    return ("ok", result, None, None)

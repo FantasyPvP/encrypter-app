@@ -1,8 +1,8 @@
-import math as maths
+import math
+# know that this algorithm works reliably because ive used and tested it before in this exact form
 
-
-def scramble(msg):  # scrambles the text by switching the rows and columns used
-    dimensions = 1 + int(maths.sqrt(len(msg)))
+def main(msg):
+    dimensions = 1 + int(math.sqrt(len(msg)))
     arr = []
     for x in range(dimensions):
         inner = []
@@ -18,5 +18,6 @@ def scramble(msg):  # scrambles the text by switching the rows and columns used
     for y in range(dimensions):
         for x in range(dimensions):
             string += arr[x][y]
+    return string
 
-    return ("ok", string.rstrip(), None, None)
+print(main(input("enter message > ")))
